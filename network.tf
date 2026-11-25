@@ -1,27 +1,3 @@
-locals {
-  vpc_cidr = "10.0.0.0/16"
-
-  enable_nat_gateway = true
-
-  subnet_azs = [
-    "eu-north-1a",
-    "eu-north-1b",
-    "eu-north-1c"
-  ]
-
-  public_subnet_cidrs = [
-    "10.0.1.0/24",
-    "10.0.2.0/24",
-    "10.0.3.0/24"
-  ]
-
-  private_subnet_cidrs = [
-    "10.0.101.0/24",
-    "10.0.102.0/24",
-    "10.0.103.0/24"
-  ]
-}
-
 resource "aws_vpc" "main" {
   cidr_block           = local.vpc_cidr
   enable_dns_hostnames = true
@@ -129,4 +105,56 @@ resource "aws_route_table_association" "private" {
 
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private.id
+}
+
+resource "aws_vpc_endpoint" "ssm" {
+  vpc_id              = aws_vpc.main.id
+  service_name        = "com.amazonaws.${local.aws_region}.ssm"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.private[*].id
+  security_group_ids  = [aws_security_group.vpce.id]
+  private_dns_enabled = true
+
+  tags = {
+    Name = "projet-vpce-ssm"
+  }
+}
+
+resource "aws_vpc_endpoint" "ssmmessages" {
+  vpc_id              = aws_vpc.main.id
+  service_name        = "com.amazonaws.${local.aws_region}.ssmmessages"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.private[*].id
+  security_group_ids  = [aws_security_group.vpce.id]
+  private_dns_enabled = true
+
+  tags = {
+    Name = "projet-vpce-ssmmessages"
+  }
+}
+
+resource "aws_vpc_endpoint" "ec2messages" {
+  vpc_id              = aws_vpc.main.id
+  service_name        = "com.amazonaws.${local.aws_region}.ec2messages"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.private[*].id
+  security_group_ids  = [aws_security_group.vpce.id]
+  private_dns_enabled = true
+
+  tags = {
+    Name = "projet-vpce-ec2messages"
+  }
+}
+
+resource "aws_vpc_endpoint" "efs" {
+  vpc_id              = aws_vpc.main.id
+  service_name        = "com.amazonaws.${local.aws_region}.elasticfilesystem"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.private[*].id
+  security_group_ids  = [aws_security_group.vpce.id]
+  private_dns_enabled = true
+
+  tags = {
+    Name = "projet-vpce-efs"
+  }
 }

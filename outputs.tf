@@ -29,3 +29,39 @@ output "rds_endpoint" {
 output "rds_credentials_secret_arn" {
   value = aws_secretsmanager_secret.rds_credentials.arn
 }
+
+output "efs_file_system_id" {
+  value = aws_efs_file_system.main.id
+}
+
+output "efs_access_point_id" {
+  value = aws_efs_access_point.main.id
+}
+
+output "efs_mount_info_secret_arn" {
+  value = aws_secretsmanager_secret.efs_mount_info.arn
+}
+
+output "ec2_efs_ssm_role_arn" {
+  value = aws_iam_role.ec2_efs_ssm.arn
+}
+
+output "ec2_efs_ssm_instance_profile_name" {
+  value = aws_iam_instance_profile.ec2_efs_ssm.name
+}
+
+output "ssm_vpc_endpoint_id" {
+  value = aws_vpc_endpoint.ssm.id
+}
+
+output "ssmmessages_vpc_endpoint_id" {
+  value = aws_vpc_endpoint.ssmmessages.id
+}
+
+output "ec2messages_vpc_endpoint_id" {
+  value = aws_vpc_endpoint.ec2messages.id
+}
+
+output "efs_vpc_endpoint_id" {
+  value = aws_vpc_endpoint.efs.id
+}
