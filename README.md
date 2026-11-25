@@ -1,7 +1,7 @@
 ## Usage
 ```hcl
 module "projet_vpc_rds" {
-    source = "git::https://github.com/Synchroneyes/upjv-devops-terraform-projet-vpc-rds.git?ref=v1.0.0"
+    source = "git::https://github.com/Synchroneyes/upjv-devops-terraform-projet-vpc-rds.git?ref=v1.0.1"
 }
 ```
 
