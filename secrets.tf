@@ -1,9 +1,9 @@
 resource "aws_secretsmanager_secret" "efs_mount_info" {
-  name                    = "projet-efs-mount-info"
+  name                    = "projet-efs-mount-info-2"
   recovery_window_in_days = 0
 
   tags = {
-    Name = "projet-efs-mount-info"
+    Name = "projet-efs-mount-info-2"
   }
 }
 
@@ -20,11 +20,11 @@ resource "aws_secretsmanager_secret_version" "efs_mount_info" {
 }
 
 resource "aws_secretsmanager_secret" "keypair_private" {
-  name                    = "keypair-projet-upjv-private"
+  name                    = "keypair-projet-upjv-private-2"
   recovery_window_in_days = 0
 
   tags = {
-    Name = "keypair-projet-upjv-private"
+    Name = "keypair-projet-upjv-private-2"
   }
 }
 
@@ -39,11 +39,11 @@ resource "aws_secretsmanager_secret_version" "keypair_private" {
 }
 
 resource "aws_secretsmanager_secret" "rds_credentials" {
-  name                    = "projet-rds-mysql-credentials"
+  name                    = "projet-rds-mysql-credentials-2"
   recovery_window_in_days = 0
 
   tags = {
-    Name = "projet-rds-mysql-credentials"
+    Name = "projet-rds-mysql-credentials-2"
   }
 }
 
